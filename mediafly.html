@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arko Ghosh – Senior Full Stack Engineer</title>
+<style>
+  :root {
+    --navy: #0D1B2A;
+    --accent: #6C63FF;
+    --accent-dim: #5549E0;
+    --bg: #F7F8FC;
+    --card: #FFFFFF;
+    --text: #0D1B2A;
+    --muted: #546E7A;
+    --border: #E0E7EF;
+    --tag-bg: #EEECFF;
+    --tag-text: #3B33B0;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+
+  /* HERO */
+  .hero { background: var(--navy); color: #fff; padding: 72px 24px 64px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(108,99,255,.15) 0%, transparent 70%); pointer-events: none; }
+  .hero-name { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 400; letter-spacing: -0.5px; color: #fff; }
+  .hero-title { font-size: 1rem; color: #A89EFF; letter-spacing: 0.12em; text-transform: uppercase; margin: 12px 0 8px; font-weight: 500; }
+  .hero-sub { font-size: 0.97rem; color: rgba(255,255,255,.5); margin-bottom: 32px; }
+  .ticker-wrap { font-family: 'Courier New', monospace; font-size: 0.88rem; color: #A89EFF; background: rgba(108,99,255,.1); border: 1px solid rgba(108,99,255,.25); display: inline-block; padding: 6px 18px; border-radius: 4px; margin-bottom: 40px; min-width: 280px; }
+  .hero-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 22px; border-radius: 5px; font-size: 0.88rem; font-weight: 500; text-decoration: none; transition: opacity .15s; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.3); }
+  .btn:hover { opacity: 0.85; }
+
+  /* LAYOUT */
+  .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 60px 0; }
+  section + section { border-top: 1px solid var(--border); }
+  .section-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-dim); font-weight: 600; margin-bottom: 8px; }
+  h2 { font-size: 1.55rem; font-weight: 600; color: var(--navy); margin-bottom: 24px; line-height: 1.25; }
+  p { color: #374151; margin-bottom: 14px; font-size: 0.97rem; }
+  p:last-child { margin-bottom: 0; }
+
+  /* HIGHLIGHTS */
+  .highlights-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
+  .highlight-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 20px 22px; }
+  .highlight-num { font-family: Georgia, serif; font-size: 1.9rem; color: var(--navy); font-weight: 400; line-height: 1; }
+  .highlight-label { font-size: 0.82rem; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+
+  /* AI CALLOUT */
+  .ai-callout { background: linear-gradient(135deg, #EEECFF 0%, #F0F4FF 100%); border: 1px solid #C4BEFF; border-radius: 10px; padding: 24px 28px; margin-bottom: 0; }
+  .ai-callout-title { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-dim); font-weight: 700; margin-bottom: 10px; }
+  .ai-callout p { color: #2D2780; font-size: 0.93rem; margin-bottom: 0; }
+  .ai-tools { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .ai-tag { background: #fff; border: 1px solid #C4BEFF; color: var(--accent-dim); font-size: 0.8rem; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+  /* SKILLS */
+  .skill-groups { display: flex; flex-direction: column; gap: 14px; }
+  .skill-row { display: flex; align-items: flex-start; gap: 12px; }
+  .skill-cat { font-size: 0.78rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; min-width: 110px; padding-top: 5px; flex-shrink: 0; }
+  .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+  .tag { background: var(--tag-bg); color: var(--tag-text); font-size: 0.8rem; padding: 4px 11px; border-radius: 4px; font-weight: 500; }
+  .tag.neutral { background: #F1F5F9; color: #334155; }
+  .tag.green { background: #ECFDF5; color: #065F46; }
+
+  /* PROJECTS */
+  .projects { display: flex; flex-direction: column; gap: 20px; }
+  .project-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 24px 26px; }
+  .project-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+  .project-title { font-size: 1.05rem; font-weight: 600; color: var(--navy); }
+  .project-badge { font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; margin-top: 3px; }
+  .badge-live { background: #ECFDF5; color: #065F46; }
+  .badge-prod { background: #EEF2FF; color: #3730A3; }
+  .badge-saas { background: #FFF7ED; color: #9A3412; }
+  .project-desc { font-size: 0.92rem; color: #374151; margin-bottom: 14px; line-height: 1.6; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .project-link { display: inline-flex; align-items: center; gap: 5px; font-size: 0.82rem; color: var(--accent-dim); text-decoration: none; font-weight: 500; margin-top: 10px; }
+  .project-link:hover { text-decoration: underline; }
+
+  /* COVER LETTER */
+  .letter-body { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 36px 40px; }
+  .letter-body p { font-size: 0.95rem; color: #374151; line-height: 1.75; }
+  .letter-body p + p { margin-top: 18px; }
+  .salutation { font-weight: 600; color: var(--navy); margin-bottom: 18px; font-size: 0.95rem; }
+
+  /* FOOTER */
+  footer { background: var(--navy); color: rgba(255,255,255,.6); text-align: center; padding: 40px 24px; font-size: 0.85rem; }
+  footer a { color: #A89EFF; text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
+  .footer-links a { font-size: 0.88rem; font-weight: 500; }
+
+  @media (max-width: 600px) {
+    .letter-body { padding: 24px 20px; }
+    .skill-cat { min-width: 80px; }
+    .project-header { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1 class="hero-name">Arko Ghosh</h1>
+  <p class="hero-title">Senior Full Stack Engineer</p>
+  <p class="hero-sub">15+ years · Java · TypeScript · Angular · Spring Boot · AWS · GCP</p>
+  <div class="ticker-wrap">
+    <span id="ticker">$ build --stack java spring-boot typescript angular aws</span>
+  </div>
+  <div class="hero-links">
+    <a href="https://github.com/bloomrono11" class="btn btn-primary" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/arko-ghosh-558520121/" class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://ems-lu-agile.appspot.com/" class="btn btn-ghost" target="_blank" rel="noopener">Live Project ↗</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <section>
+    <p class="section-label">At a Glance</p>
+    <h2>Full stack depth, from financial models to distributed systems</h2>
+    <div class="highlights-grid">
+      <div class="highlight-card">
+        <div class="highlight-num">15+</div>
+        <div class="highlight-label">Years building production full-stack systems</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-num">Java + TS</div>
+        <div class="highlight-label">Spring Boot backend · Angular/TypeScript frontend</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-num">SaaS</div>
+        <div class="highlight-label">Multi-tenant platforms built from scratch and scaled</div>
+      </div>
+      <div class="highlight-card">
+        <div class="highlight-num">AI-first</div>
+        <div class="highlight-label">Claude Code · Copilot · Devin — daily across the SDLC</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">AI-Assisted Development</p>
+    <h2>Engineering with AI as a multiplier</h2>
+    <div class="ai-callout">
+      <div class="ai-callout-title">Daily toolchain</div>
+      <p>I use AI-assisted development tools across the full SDLC — not just for code completion, but for architectural exploration, automated PR reviews, dependency management, and accelerating test coverage. At Citi, I use Tribe AI's Delphyne bot for automated PR reviews and merge workflows. I treat this as a core engineering skill, not a novelty.</p>
+      <div class="ai-tools">
+        <span class="ai-tag">Claude Code</span>
+        <span class="ai-tag">GitHub Copilot (IDE + Teams)</span>
+        <span class="ai-tag">Devin</span>
+        <span class="ai-tag">Delphyne (PR automation)</span>
+        <span class="ai-tag">Renovate (dependency mgmt)</span>
+        <span class="ai-tag">Dependabot</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Technical Skills</p>
+    <h2>Stack</h2>
+    <div class="skill-groups">
+      <div class="skill-row">
+        <span class="skill-cat">Backend</span>
+        <div class="tags">
+          <span class="tag">Java</span>
+          <span class="tag">Spring Boot</span>
+          <span class="tag">Spring Security</span>
+          <span class="tag">Spring Integration</span>
+          <span class="tag">Hibernate · JPA</span>
+          <span class="tag">REST · SOAP</span>
+          <span class="tag">Hazelcast</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Frontend</span>
+        <div class="tags">
+          <span class="tag">TypeScript</span>
+          <span class="tag">Angular</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">HTML5 · CSS3 · SASS</span>
+          <span class="tag">Bootstrap</span>
+          <span class="tag">RxJS</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Messaging</span>
+        <div class="tags">
+          <span class="tag">Apache Kafka</span>
+          <span class="tag">CDC patterns</span>
+          <span class="tag">GCP Pub/Sub</span>
+          <span class="tag">Azure Service Bus</span>
+          <span class="tag">Idempotency · At-least-once</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Cloud / Ops</span>
+        <div class="tags">
+          <span class="tag">AWS</span>
+          <span class="tag">GCP</span>
+          <span class="tag">Azure</span>
+          <span class="tag">OpenShift · Kubernetes</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Jenkins CI/CD</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Observability</span>
+        <div class="tags">
+          <span class="tag">Datadog (in training)</span>
+          <span class="tag">AppDynamics</span>
+          <span class="tag">ELK Stack</span>
+          <span class="tag">Prometheus · Grafana</span>
+          <span class="tag">SonarQube · Snyk</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Databases</span>
+        <div class="tags">
+          <span class="tag">PostgreSQL · MySQL</span>
+          <span class="tag">Oracle</span>
+          <span class="tag">MongoDB</span>
+          <span class="tag">BigQuery</span>
+          <span class="tag">Cloud SQL</span>
+          <span class="tag">Multi-tenant schema design</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Security</span>
+        <div class="tags">
+          <span class="tag">OAuth2 · OIDC</span>
+          <span class="tag">SAML 2.0</span>
+          <span class="tag">JWT</span>
+          <span class="tag">OWASP</span>
+          <span class="tag">RBAC · ABAC</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Projects</p>
+    <h2>Selected work</h2>
+    <div class="projects">
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">SPADU – Employee Management System</div>
+          <span class="project-badge badge-live">Live</span>
+        </div>
+        <p class="project-desc">Full-stack SaaS application built from scratch — Spring Boot 4.1, Java 21, Angular/TypeScript frontend, Spring Security with JWT, Stripe billing, and GCP App Engine deployment. Demonstrates end-to-end ownership from architecture through production operations.</p>
+        <div class="project-tags">
+          <span class="tag">Spring Boot 4.1 · Java 21</span>
+          <span class="tag">Angular / TypeScript</span>
+          <span class="tag">Spring Security · JWT</span>
+          <span class="tag">Stripe</span>
+          <span class="tag">MySQL · GCP</span>
+        </div>
+        <a href="https://ems-lu-agile.appspot.com/" class="project-link" target="_blank" rel="noopener">View live ↗</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">Citi – FD Risk Processing Platform</div>
+          <span class="project-badge badge-prod">Production · Synechron</span>
+        </div>
+        <p class="project-desc">High-throughput Java/Spring Boot trade risk system processing global financial data for Citi Group. Built Kafka event pipelines with CDC patterns and exactly-once-safe processing. Developed Angular/TypeScript dashboards for real-time trade monitoring. Championed observability via AppDynamics, ELK Stack, and SonarQube quality gates. Currently onboarding services to Datadog.</p>
+        <div class="project-tags">
+          <span class="tag">Java · Spring Boot</span>
+          <span class="tag">Angular / TypeScript</span>
+          <span class="tag">Kafka · CDC</span>
+          <span class="tag">OpenShift · K8s</span>
+          <span class="tag">AppDynamics · ELK</span>
+          <span class="tag">Datadog (in progress)</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">Privacy4Cars – Multi-Tenant SaaS Platform</div>
+          <span class="project-badge badge-saas">SaaS · Lead Engineer</span>
+        </div>
+        <p class="project-desc">Built the entire GCP-native platform from scratch and led a 7-person team. Delivered complex billing workflows (Stripe + QuickBooks), subscription management, webhook-based event handling, and a Java 8→17 migration with zero service disruption. Designed multi-tenant data isolation and identity governance for 30+ staff across cloud and SaaS systems.</p>
+        <div class="project-tags">
+          <span class="tag">Java 17 · Spring Boot</span>
+          <span class="tag">Angular / TypeScript</span>
+          <span class="tag">Stripe · QuickBooks</span>
+          <span class="tag">GCP · Pub/Sub</span>
+          <span class="tag">Multi-tenant architecture</span>
+          <span class="tag">Team lead × 7</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">Fargo Travels – Amadeus Booking Platform</div>
+          <span class="project-badge badge-prod">Production · IT Lead</span>
+        </div>
+        <p class="project-desc">Amadeus-certified flight booking platform with SOAP/REST API integration, Okta SSO across five platforms (SAML, OAuth/OIDC), and payment processing via Stripe, CyberSource, and Authorize.net. Upgraded Java codebase from 7 to 8 with streams, lambdas, and concurrency improvements.</p>
+        <div class="project-tags">
+          <span class="tag">Java · Spring Boot</span>
+          <span class="tag">Amadeus API</span>
+          <span class="tag">Okta · SAML · OIDC</span>
+          <span class="tag">Stripe · CyberSource</span>
+          <span class="tag">Angular / TypeScript</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Cover Letter</p>
+    <h2>Why Mediafly</h2>
+    <div class="letter-body">
+      <p class="salutation">To the Mediafly Engineering Team,</p>
+      <p>Value calculators and TCO models are deceptively complex engineering problems. The business logic is dense, the data relationships are non-trivial, and the output has to be clear enough for a sales rep to use confidently in front of a buyer. That challenge sits right at the intersection of backend precision and frontend clarity — which is where I've spent most of my career.</p>
+      <p>Over 15+ years I've built full-stack systems where correctness in the data layer directly translates to outcomes people act on. At Synechron embedded within Citi, I own Java/Spring Boot services that calculate and communicate trade risk metrics to analysts under strict SLA requirements — financial calculation accuracy is non-negotiable. At Privacy4Cars I built the entire multi-tenant SaaS platform from scratch, leading a 7-person team through complex billing and reporting workflows that non-technical operations staff depend on daily.</p>
+      <p>On the frontend, my production stack is TypeScript and Angular — component-driven architecture, reactive data flows, and data-rich dashboards for business users. React is an adjustment I'd make quickly given the shared TypeScript foundation and component model.</p>
+      <p>The AI-assisted development requirement caught my eye because you framed it as a mindset, not just a tool — and that's exactly right. I use Claude Code, GitHub Copilot, and Devin daily across the full SDLC: architectural exploration, automated PR reviews via Delphyne at Citi, dependency management via Renovate, and test coverage acceleration. It's a genuine productivity multiplier and I treat it as a core engineering competency.</p>
+      <p>On observability — I have production experience with AppDynamics and the ELK Stack for distributed diagnostics, and I'm currently completing Datadog onboarding training through Citi as we migrate our services.</p>
+      <p>Mediafly's focus on helping sellers quantify and communicate impact is a problem that rewards engineers who think about what the data means to the person reading it. That's how I approach systems — and I'd enjoy building them with your team.</p>
+      <p style="margin-top: 24px; font-weight: 600; color: var(--navy);">Arko Ghosh<br>
+      <span style="font-weight: 400; color: var(--muted); font-size: 0.9rem;">aghosh7@lakeheadu.ca · Mississauga, ON · <a href="https://www.linkedin.com/in/arko-ghosh-558520121/" style="color: var(--accent-dim);">LinkedIn</a> · <a href="https://github.com/bloomrono11" style="color: var(--accent-dim);">GitHub</a></span>
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Education</p>
+    <h2>Academic background</h2>
+    <div class="highlights-grid">
+      <div class="highlight-card">
+        <div style="font-size: 0.98rem; font-weight: 600; color: var(--navy); margin-bottom: 6px;">MSc Engineering</div>
+        <div class="highlight-label">Lakehead University, Ontario · 2024–2025</div>
+        <div style="margin-top: 8px; font-size: 0.82rem; color: var(--muted);">Agile Software Development, Large-Scale Data Analytics, Computer Networks</div>
+      </div>
+      <div class="highlight-card">
+        <div style="font-size: 0.98rem; font-weight: 600; color: var(--navy); margin-bottom: 6px;">BSc Computer Science</div>
+        <div class="highlight-label">NDSU, Fargo ND · 2007–2011</div>
+        <div style="margin-top: 8px; font-size: 0.82rem; color: var(--muted);">Algorithms, Data Structures, Database Systems, OS Design</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="https://github.com/bloomrono11" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/arko-ghosh-558520121/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://ems-lu-agile.appspot.com/" target="_blank" rel="noopener">Live Project</a>
+    <a href="mailto:aghosh7@lakeheadu.ca">aghosh7@lakeheadu.ca</a>
+  </div>
+  <div>Arko Ghosh · Mississauga, ON · Built with Java, Angular, and 15+ years of full-stack curiosity</div>
+</footer>
+
+<script>
+  const stack = [
+    '$ java --stack spring-boot angular typescript aws',
+    '$ git log --oneline --author="Arko" --since="15 years ago"',
+    '$ kubectl rollout status deployment/value-calculator',
+    '$ ng build --configuration=production --optimization',
+    '$ claude --mode architect --task "design scalable SaaS feature"',
+  ];
+  let idx = 0;
+  const el = document.getElementById('ticker');
+  setInterval(() => {
+    el.style.opacity = 0;
+    setTimeout(() => {
+      idx = (idx + 1) % stack.length;
+      el.textContent = stack[idx];
+      el.style.opacity = 1;
+    }, 400);
+  }, 3200);
+</script>
+
+</body>
+</html>

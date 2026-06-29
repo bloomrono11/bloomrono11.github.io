@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arko Ghosh – Software Development Manager</title>
+<style>
+  :root {
+    --navy: #0D1B2A;
+    --accent: #F59E0B;
+    --accent-dim: #D97706;
+    --bg: #F8F7F4;
+    --card: #FFFFFF;
+    --text: #0D1B2A;
+    --muted: #6B7280;
+    --border: #E5E7EB;
+    --tag-bg: #FEF3C7;
+    --tag-text: #92400E;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+
+  /* HERO */
+  .hero { background: var(--navy); color: #fff; padding: 72px 24px 64px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(245,158,11,.12) 0%, transparent 70%); pointer-events: none; }
+  .hero-name { font-family: Georgia, serif; font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 400; color: #fff; }
+  .hero-title { font-size: 1rem; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin: 12px 0 8px; font-weight: 500; }
+  .hero-sub { font-size: 0.97rem; color: rgba(255,255,255,.5); margin-bottom: 32px; }
+  .ticker-wrap { font-family: 'Courier New', monospace; font-size: 0.88rem; color: var(--accent); background: rgba(245,158,11,.08); border: 1px solid rgba(245,158,11,.2); display: inline-block; padding: 6px 18px; border-radius: 4px; margin-bottom: 40px; min-width: 300px; transition: opacity 0.4s; }
+  .hero-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 22px; border-radius: 5px; font-size: 0.88rem; font-weight: 500; text-decoration: none; transition: opacity .15s; }
+  .btn-primary { background: var(--accent); color: var(--navy); }
+  .btn-ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.3); }
+  .btn:hover { opacity: 0.85; }
+
+  /* LAYOUT */
+  .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 60px 0; }
+  section + section { border-top: 1px solid var(--border); }
+  .section-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-dim); font-weight: 600; margin-bottom: 8px; }
+  h2 { font-size: 1.55rem; font-weight: 600; color: var(--navy); margin-bottom: 24px; }
+  p { color: #374151; font-size: 0.97rem; margin-bottom: 14px; }
+  p:last-child { margin-bottom: 0; }
+
+  /* LEADERSHIP STATS */
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 22px; }
+  .stat-num { font-family: Georgia, serif; font-size: 2rem; color: var(--navy); line-height: 1; }
+  .stat-label { font-size: 0.82rem; color: var(--muted); margin-top: 5px; line-height: 1.4; }
+
+  /* LEADERSHIP PILLARS */
+  .pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+  .pillar { background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 8px; padding: 20px 22px; }
+  .pillar-title { font-size: 0.88rem; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+  .pillar p { font-size: 0.88rem; color: #4B5563; margin: 0; }
+
+  /* SKILLS */
+  .skill-groups { display: flex; flex-direction: column; gap: 14px; }
+  .skill-row { display: flex; align-items: flex-start; gap: 12px; }
+  .skill-cat { font-size: 0.78rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; min-width: 120px; padding-top: 5px; flex-shrink: 0; }
+  .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+  .tag { background: var(--tag-bg); color: var(--tag-text); font-size: 0.8rem; padding: 4px 11px; border-radius: 4px; font-weight: 500; }
+  .tag.neutral { background: #F1F5F9; color: #334155; }
+
+  /* EXPERIENCE CARDS */
+  .experience { display: flex; flex-direction: column; gap: 20px; }
+  .exp-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 24px 26px; }
+  .exp-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+  .exp-title { font-size: 1.05rem; font-weight: 600; color: var(--navy); }
+  .exp-company { font-size: 0.85rem; color: var(--muted); margin-top: 2px; }
+  .exp-badge { font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; margin-top: 3px; }
+  .badge-mgr { background: #FEF3C7; color: #92400E; }
+  .badge-lead { background: #ECFDF5; color: #065F46; }
+  .badge-ic { background: #EFF6FF; color: #1E40AF; }
+  .exp-bullets { list-style: none; padding: 0; margin-top: 10px; }
+  .exp-bullets li { font-size: 0.92rem; color: #374151; padding: 5px 0 5px 16px; position: relative; line-height: 1.6; }
+  .exp-bullets li::before { content: '›'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+
+  /* COVER LETTER */
+  .letter-body { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 36px 40px; }
+  .letter-body p { font-size: 0.95rem; color: #374151; line-height: 1.75; }
+  .letter-body p + p { margin-top: 18px; }
+
+  /* FOOTER */
+  footer { background: var(--navy); color: rgba(255,255,255,.6); text-align: center; padding: 40px 24px; font-size: 0.85rem; }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
+  .footer-links a { font-size: 0.88rem; font-weight: 500; }
+
+  @media (max-width: 600px) {
+    .letter-body { padding: 24px 20px; }
+    .skill-cat { min-width: 90px; }
+    .exp-header { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1 class="hero-name">Arko Ghosh</h1>
+  <p class="hero-title">Software Development Manager</p>
+  <p class="hero-sub">15+ years engineering · 5+ years leading teams · Agile coaching · Mississauga, ON</p>
+  <div class="ticker-wrap" id="ticker">$ lead --team 7 --methodology scrum --style situational</div>
+  <div class="hero-links">
+    <a href="https://github.com/bloomrono11" class="btn btn-primary" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/arko-ghosh-558520121/" class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://ems-lu-agile.appspot.com/" class="btn btn-ghost" target="_blank" rel="noopener">Live Project ↗</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <section>
+    <p class="section-label">Leadership at a Glance</p>
+    <h2>Building teams that build great products</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Years in software engineering and leadership</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">7</div>
+        <div class="stat-label">Direct reports built and led at Privacy4Cars from inception</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">3 regions</div>
+        <div class="stat-label">US, Russia, India — cross-regional Agile team management</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">Mississauga</div>
+        <div class="stat-label">Local candidate · ready for SOTI hybrid model</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Leadership Approach</p>
+    <h2>How I lead</h2>
+    <div class="pillars">
+      <div class="pillar">
+        <div class="pillar-title">Situational Coaching</div>
+        <p>Blanchard-certified. I adapt coaching style — directing, coaching, supporting, delegating — based on each engineer's skill and motivation level, not a one-size-fits-all approach.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-title">Agile Facilitation</div>
+        <p>Sprint planning, standups, retrospectives, and backlog refinement across time zones. I partner with ScrumMasters to remove systemic blockers, not to control the sprint.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-title">Technical Credibility</div>
+        <p>I give engineers concrete, specific guidance because I've built the systems they're working on. Code reviews, architecture sessions, and pairing — not just process oversight.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-title">Growing People</div>
+        <p>1:1s, individual development plans, onboarding runbooks, and knowledge-sharing sessions that reduce ramp-up time and build long-term team capability.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-title">Best Practices Culture</div>
+        <p>CI/CD quality gates, code review standards, TDD, observability-first design — introduced as team norms, not just personal habits, so the whole org benefits.</p>
+      </div>
+      <div class="pillar">
+        <div class="pillar-title">Modern Tooling</div>
+        <p>AI-assisted development (Claude Code, Copilot, Devin), automated PR reviews via Delphyne, and dependency governance via Renovate — introduced at team level at Citi.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Leadership Experience</p>
+    <h2>Where I've led</h2>
+    <div class="experience">
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-title">Lead Software Engineer / Manager</div>
+            <div class="exp-company">Privacy4Cars · Remote · Feb 2024 – Mar 2025</div>
+          </div>
+          <span class="exp-badge badge-mgr">People Manager</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Built and led a 7-person engineering team from inception — hiring, onboarding, mentoring, and conducting performance reviews while remaining hands-on with platform architecture</li>
+          <li>Applied Blanchard Situational Leadership to adapt coaching style per engineer, accelerating ramp-up and delivery velocity across a seed-stage startup environment</li>
+          <li>Led Java 8→17 migration with zero service disruption across the full team — planned, delegated, reviewed, and shipped with no customer impact</li>
+          <li>Designed identity governance and access management across GCP, AWS, Atlassian, and SaaS tooling for 30+ staff — balancing security and operational efficiency</li>
+          <li>Drove Agile ceremonies, sprint planning, and retrospectives in a fully remote team across multiple time zones</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-title">Sr. Software Engineering Manager</div>
+            <div class="exp-company">Edifecs · Remote · Sep 2023 – Feb 2024</div>
+          </div>
+          <span class="exp-badge badge-mgr">People Manager</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Managed cross-regional engineering teams spanning US and Russia — facilitated sprint ceremonies across time zones and drove alignment on delivery priorities</li>
+          <li>Coached engineers on Agile principles, removing systemic blockers, and partnered with the ScrumMaster to improve team velocity and sprint predictability</li>
+          <li>Completed Blanchard Situational Leadership certification — applied directly to coaching direct reports at varying experience and motivation levels</li>
+          <li>Led technical direction for XEngine, XESManager, Visualizer Server, EAM Client, and FHIR profile healthcare products</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-title">Lead Software Engineer · Mentor</div>
+            <div class="exp-company">Synechron (at Citi) · Remote · Mar 2025 – Present</div>
+          </div>
+          <span class="exp-badge badge-lead">Tech Lead</span>
+        </div>
+        <ul class="exp-bullets">
+          <li>Mentored junior and intermediate engineers on Java best practices, Kafka event-driven patterns, and secure coding standards through code reviews and pair sessions</li>
+          <li>Led knowledge-sharing sessions on Spring Boot microservice design and contributed to onboarding runbooks that reduced new engineer ramp-up time</li>
+          <li>Completed Synechron Manager Effectiveness Program — team performance, engineering culture, cross-functional communication, and continuous improvement</li>
+          <li>Introduced AI-assisted development toolchain (Claude Code, Copilot, Devin, Delphyne) at team level, driving adoption of modern engineering practices</li>
+          <li>Championed SonarQube and Snyk quality gates in CI/CD pipelines as team-wide engineering standards</li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Technical Foundation</p>
+    <h2>What I bring to the table — and coach others on</h2>
+    <div class="skill-groups">
+      <div class="skill-row">
+        <span class="skill-cat">Leadership</span>
+        <div class="tags">
+          <span class="tag">Situational Leadership (Blanchard)</span>
+          <span class="tag">Manager Effectiveness (Synechron)</span>
+          <span class="tag">Agile / Scrum coaching</span>
+          <span class="tag">Sprint facilitation</span>
+          <span class="tag">Hiring & onboarding</span>
+          <span class="tag">Performance development</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Engineering</span>
+        <div class="tags">
+          <span class="tag neutral">Java · Spring Boot</span>
+          <span class="tag neutral">TypeScript · Angular</span>
+          <span class="tag neutral">Kafka · Event-driven</span>
+          <span class="tag neutral">Microservices</span>
+          <span class="tag neutral">REST APIs</span>
+          <span class="tag neutral">TDD · CI/CD</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Cloud & Ops</span>
+        <div class="tags">
+          <span class="tag neutral">GCP · AWS · Azure</span>
+          <span class="tag neutral">Kubernetes · OpenShift</span>
+          <span class="tag neutral">Jenkins</span>
+          <span class="tag neutral">SonarQube · Snyk</span>
+          <span class="tag neutral">Datadog · AppDynamics</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">AI Tools</span>
+        <div class="tags">
+          <span class="tag neutral">Claude Code</span>
+          <span class="tag neutral">GitHub Copilot</span>
+          <span class="tag neutral">Devin</span>
+          <span class="tag neutral">Delphyne (PR automation)</span>
+          <span class="tag neutral">Renovate</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Tools</span>
+        <div class="tags">
+          <span class="tag neutral">Jira · Confluence</span>
+          <span class="tag neutral">Bitbucket · GitHub</span>
+          <span class="tag neutral">IntelliJ IDEA</span>
+          <span class="tag neutral">Postman</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Cover Letter</p>
+    <h2>Why SOTI</h2>
+    <div class="letter-body">
+      <p style="font-weight:600;color:var(--navy);margin-bottom:18px;">To the SOTI Engineering Team,</p>
+      <p>What draws me to this role isn't just the technical scope — it's the mandate to build the capability of the organization itself. Coaching engineers, improving how teams work, and creating conditions where great software gets built consistently is work I've done across multiple roles and find genuinely rewarding.</p>
+      <p>Over 15+ years in software engineering I've led teams as both a hands-on architect and a people manager. At Privacy4Cars I built and grew a 7-person engineering team from scratch — hiring, onboarding, mentoring, and running performance cycles while remaining technically accountable for the platform architecture. I applied Blanchard Situational Leadership to adapt my coaching style to each engineer's experience level, which accelerated ramp-up and delivery velocity significantly. At Edifecs as Sr. Software Engineering Manager I led cross-regional teams across the US and Russia — facilitating sprint ceremonies, removing blockers, partnering with the ScrumMaster, and coaching on Agile practices that meaningfully improved predictability.</p>
+      <p>At Synechron embedded at Citi, I continue mentoring junior and intermediate engineers — conducting code reviews, running knowledge-sharing sessions on Spring Boot and Kafka design, and contributing to onboarding runbooks. I completed Synechron's Manager Effectiveness Program covering team performance, engineering culture, and continuous improvement, and I've introduced a modern AI-assisted development toolchain at team level that has become a genuine productivity multiplier.</p>
+      <p>What I bring to a Software Development Manager role at SOTI is the combination of deep technical credibility with genuine coaching instinct. Engineers trust me because I've built the systems they're working on — I give concrete, specific guidance on architecture, testing, and best practices, not just process overhead. And I understand the distinction clearly: the ScrumMaster facilitates the sprint; my role is to remove systemic obstacles and develop people.</p>
+      <p>SOTI's commitment to going where nobody has gone before — and your two decades of continuous innovation in EMM — aligns with how I think about engineering culture: always learning, always improving, never satisfied with good enough.</p>
+      <p>I'm based in Mississauga and the hybrid model works perfectly. I'd welcome the conversation.</p>
+      <p style="margin-top:24px;font-weight:600;color:var(--navy);">Arko Ghosh<br>
+        <span style="font-weight:400;color:var(--muted);font-size:0.9rem;">aghosh7@lakeheadu.ca · Mississauga, ON ·
+          <a href="https://www.linkedin.com/in/arko-ghosh-558520121/" style="color:var(--accent-dim);">LinkedIn</a> ·
+          <a href="https://github.com/bloomrono11" style="color:var(--accent-dim);">GitHub</a>
+        </span>
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Education & Credentials</p>
+    <h2>Academic & professional background</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div style="font-weight:600;color:var(--navy);margin-bottom:4px;">MSc Engineering</div>
+        <div class="stat-label">Lakehead University, ON · 2024–2025<br>Agile Software Development · Principles of Management & Leadership</div>
+      </div>
+      <div class="stat-card">
+        <div style="font-weight:600;color:var(--navy);margin-bottom:4px;">BSc Computer Science</div>
+        <div class="stat-label">North Dakota State University · 2007–2011<br>Algorithms · Data Structures · OS Design</div>
+      </div>
+      <div class="stat-card">
+        <div style="font-weight:600;color:var(--navy);margin-bottom:4px;">Blanchard Leadership</div>
+        <div class="stat-label">Situational Leadership certification<br>Applied at Edifecs & Privacy4Cars</div>
+      </div>
+      <div class="stat-card">
+        <div style="font-weight:600;color:var(--navy);margin-bottom:4px;">Manager Effectiveness</div>
+        <div class="stat-label">Synechron program<br>Team performance · Engineering culture · CI</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="https://github.com/bloomrono11" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/arko-ghosh-558520121/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://ems-lu-agile.appspot.com/" target="_blank" rel="noopener">Live Project</a>
+    <a href="mailto:aghosh7@lakeheadu.ca">aghosh7@lakeheadu.ca</a>
+  </div>
+  <div>Arko Ghosh · Mississauga, ON · Engineering manager who still ships code</div>
+</footer>
+
+<script>
+  const lines = [
+    '$ lead --team 7 --methodology scrum --style situational',
+    '$ coach --engineer junior --session "kafka patterns + code review"',
+    '$ retro --blockers removed --velocity improved --team aligned',
+    '$ hire --fit culture+technical --onboard --ramp-up accelerated',
+    '$ git log --author=team --since="inception" | wc -l',
+  ];
+  let idx = 0;
+  const el = document.getElementById('ticker');
+  setInterval(() => {
+    el.style.opacity = 0;
+    setTimeout(() => {
+      idx = (idx + 1) % lines.length;
+      el.textContent = lines[idx];
+      el.style.opacity = 1;
+    }, 400);
+  }, 3200);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arko Ghosh – Senior Software Engineer</title>
+<style>
+  :root {
+    --navy: #0D1B2A;
+    --accent: #FF6B35;
+    --accent-dim: #E05A28;
+    --bg: #F9F8F7;
+    --card: #FFFFFF;
+    --text: #0D1B2A;
+    --muted: #6B7280;
+    --border: #E5E7EB;
+    --tag-bg: #FFF0EB;
+    --tag-text: #C04A1A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+
+  /* HERO */
+  .hero { background: var(--navy); color: #fff; padding: 72px 24px 64px; text-align: center; position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(255,107,53,.13) 0%, transparent 70%); pointer-events: none; }
+  .hero-name { font-family: Georgia, serif; font-size: clamp(2.4rem, 6vw, 3.8rem); font-weight: 400; color: #fff; }
+  .hero-title { font-size: 1rem; color: var(--accent); letter-spacing: 0.12em; text-transform: uppercase; margin: 12px 0 8px; font-weight: 500; }
+  .hero-sub { font-size: 0.97rem; color: rgba(255,255,255,.5); margin-bottom: 32px; }
+  .ticker-wrap { font-family: 'Courier New', monospace; font-size: 0.88rem; color: var(--accent); background: rgba(255,107,53,.08); border: 1px solid rgba(255,107,53,.2); display: inline-block; padding: 6px 18px; border-radius: 4px; margin-bottom: 40px; min-width: 300px; transition: opacity 0.4s; }
+  .hero-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 22px; border-radius: 5px; font-size: 0.88rem; font-weight: 500; text-decoration: none; transition: opacity .15s; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-ghost { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.3); }
+  .btn:hover { opacity: 0.85; }
+
+  /* LAYOUT */
+  .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 60px 0; }
+  section + section { border-top: 1px solid var(--border); }
+  .section-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-dim); font-weight: 600; margin-bottom: 8px; }
+  h2 { font-size: 1.55rem; font-weight: 600; color: var(--navy); margin-bottom: 24px; }
+  p { color: #374151; font-size: 0.97rem; margin-bottom: 14px; }
+  p:last-child { margin-bottom: 0; }
+
+  /* STATS */
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: 16px; }
+  .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 22px; }
+  .stat-num { font-family: Georgia, serif; font-size: 1.9rem; color: var(--navy); line-height: 1; }
+  .stat-label { font-size: 0.82rem; color: var(--muted); margin-top: 5px; line-height: 1.4; }
+
+  /* SYSTEMS CALLOUT */
+  .systems-callout { background: linear-gradient(135deg, #FFF0EB 0%, #FFF7F4 100%); border: 1px solid #FECAB4; border-radius: 10px; padding: 24px 28px; }
+  .systems-title { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent-dim); font-weight: 700; margin-bottom: 10px; }
+  .systems-callout p { color: #7C2D12; font-size: 0.93rem; margin-bottom: 0; }
+  .systems-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .sys-tag { background: #fff; border: 1px solid #FECAB4; color: var(--accent-dim); font-size: 0.8rem; padding: 4px 12px; border-radius: 20px; font-weight: 500; }
+
+  /* SKILLS */
+  .skill-groups { display: flex; flex-direction: column; gap: 14px; }
+  .skill-row { display: flex; align-items: flex-start; gap: 12px; }
+  .skill-cat { font-size: 0.78rem; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; min-width: 120px; padding-top: 5px; flex-shrink: 0; }
+  .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+  .tag { background: var(--tag-bg); color: var(--tag-text); font-size: 0.8rem; padding: 4px 11px; border-radius: 4px; font-weight: 500; }
+  .tag.neutral { background: #F1F5F9; color: #334155; }
+  .tag.kotlin { background: #EEF2FF; color: #3730A3; }
+
+  /* PROJECTS */
+  .projects { display: flex; flex-direction: column; gap: 20px; }
+  .project-card { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 24px 26px; }
+  .project-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+  .project-title { font-size: 1.05rem; font-weight: 600; color: var(--navy); }
+  .project-badge { font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; margin-top: 3px; }
+  .badge-live { background: #ECFDF5; color: #065F46; }
+  .badge-prod { background: #EEF2FF; color: #3730A3; }
+  .badge-mvp { background: #FFF7ED; color: #9A3412; }
+  .project-desc { font-size: 0.92rem; color: #374151; margin-bottom: 14px; line-height: 1.6; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .project-tag { background: #F1F5F9; color: #334155; font-size: 0.78rem; padding: 3px 10px; border-radius: 4px; }
+  .project-link { display: inline-flex; align-items: center; gap: 5px; font-size: 0.82rem; color: var(--accent-dim); text-decoration: none; font-weight: 500; margin-top: 10px; }
+  .project-link:hover { text-decoration: underline; }
+
+  /* COVER LETTER */
+  .letter-body { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 36px 40px; }
+  .letter-body p { font-size: 0.95rem; color: #374151; line-height: 1.75; }
+  .letter-body p + p { margin-top: 18px; }
+
+  /* FOOTER */
+  footer { background: var(--navy); color: rgba(255,255,255,.6); text-align: center; padding: 40px 24px; font-size: 0.85rem; }
+  footer a { color: var(--accent); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+  .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
+  .footer-links a { font-size: 0.88rem; font-weight: 500; }
+
+  @media (max-width: 600px) {
+    .letter-body { padding: 24px 20px; }
+    .skill-cat { min-width: 90px; }
+    .project-header { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <h1 class="hero-name">Arko Ghosh</h1>
+  <p class="hero-title">Senior Software Engineer · Core Experiences</p>
+  <p class="hero-sub">15+ years · Java / Kotlin (ramping) · GCP · Systems Design · Startup-paced</p>
+  <div class="ticker-wrap" id="ticker">$ design --api reliable --abstraction clean --system end-to-end</div>
+  <div class="hero-links">
+    <a href="https://github.com/bloomrono11" class="btn btn-primary" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/arko-ghosh-558520121/" class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://ems-lu-agile.appspot.com/" class="btn btn-ghost" target="_blank" rel="noopener">Live Project ↗</a>
+  </div>
+</header>
+
+<main class="container">
+
+  <section>
+    <p class="section-label">At a Glance</p>
+    <h2>Systems thinking at the intersection of product and infrastructure</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Years building production backend systems</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">GCP</div>
+        <div class="stat-label">Cloud Functions · App Engine · Pub/Sub · Cloud Run · BigQuery</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">Java → Kotlin</div>
+        <div class="stat-label">Strong JVM foundation, actively ramping on Kotlin/KMP</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num">2× Seed</div>
+        <div class="stat-label">Startup-paced engineering at Privacy4Cars & Astral Synthetics</div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Systems Thinking</p>
+    <h2>How I approach engineering</h2>
+    <div class="systems-callout">
+      <div class="systems-title">End-to-end by default</div>
+      <p>Optimizing a system requires understanding it end-to-end — not just the service you own. At Citi I trace performance issues from the API gateway through Kafka pipelines to downstream consumers. At Privacy4Cars I designed data store selection (Cloud SQL vs Datastore vs BigQuery) based on access patterns across the whole system — not just what was easiest locally. Simplicity is a design goal, not an afterthought.</p>
+      <div class="systems-tags">
+        <span class="sys-tag">API contract design</span>
+        <span class="sys-tag">Efficient abstractions</span>
+        <span class="sys-tag">JVM performance profiling</span>
+        <span class="sys-tag">Parsing & throughput optimization</span>
+        <span class="sys-tag">Scope reduction to ship faster</span>
+        <span class="sys-tag">Cross-team SDK integration</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Technical Skills</p>
+    <h2>Stack</h2>
+    <div class="skill-groups">
+      <div class="skill-row">
+        <span class="skill-cat">Languages</span>
+        <div class="tags">
+          <span class="tag">Java (15+ yrs)</span>
+          <span class="tag kotlin">Kotlin (actively ramping)</span>
+          <span class="tag neutral">TypeScript</span>
+          <span class="tag neutral">Python</span>
+          <span class="tag neutral">SQL</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">GCP (deep)</span>
+        <div class="tags">
+          <span class="tag">Cloud Functions</span>
+          <span class="tag">App Engine</span>
+          <span class="tag">Pub/Sub</span>
+          <span class="tag">Cloud Run</span>
+          <span class="tag">Cloud SQL</span>
+          <span class="tag">BigQuery</span>
+          <span class="tag">Cloud Storage</span>
+          <span class="tag">Cloud Armor</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Backend</span>
+        <div class="tags">
+          <span class="tag neutral">Spring Boot</span>
+          <span class="tag neutral">Spring Security</span>
+          <span class="tag neutral">Hibernate · JPA</span>
+          <span class="tag neutral">REST APIs</span>
+          <span class="tag neutral">Hazelcast (caching)</span>
+          <span class="tag neutral">Kafka</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Performance</span>
+        <div class="tags">
+          <span class="tag neutral">JVM tuning</span>
+          <span class="tag neutral">ExecutorService</span>
+          <span class="tag neutral">CompletableFuture</span>
+          <span class="tag neutral">Stream Parallelism</span>
+          <span class="tag neutral">Spring Batch</span>
+          <span class="tag neutral">Algorithm optimization</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">Cloud / Ops</span>
+        <div class="tags">
+          <span class="tag neutral">AWS</span>
+          <span class="tag neutral">Azure</span>
+          <span class="tag neutral">Kubernetes · OpenShift</span>
+          <span class="tag neutral">Docker</span>
+          <span class="tag neutral">Jenkins CI/CD</span>
+          <span class="tag neutral">SonarQube · Snyk</span>
+        </div>
+      </div>
+      <div class="skill-row">
+        <span class="skill-cat">AI Tools</span>
+        <div class="tags">
+          <span class="tag neutral">Claude Code</span>
+          <span class="tag neutral">GitHub Copilot</span>
+          <span class="tag neutral">Devin</span>
+          <span class="tag neutral">Renovate</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Projects</p>
+    <h2>Selected work</h2>
+    <div class="projects">
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">Citi – FD Risk Processing Platform</div>
+          <span class="project-badge badge-prod">Production · Synechron</span>
+        </div>
+        <p class="project-desc">Designed and owns backend services processing 400–600K daily trade transactions. Architected API abstractions consumed by multiple product teams — scoping integration contracts, reducing surface area, and applying end-to-end systems thinking to eliminate pipeline bottlenecks. Built Kafka event pipelines with CDC patterns and exactly-once-safe delivery. Optimized throughput via JVM tuning, multi-threaded request handling, and Hazelcast in-memory caching under strict SOD/EOD SLA constraints.</p>
+        <div class="project-tags">
+          <span class="project-tag">Java · Spring Boot</span>
+          <span class="project-tag">Kafka · CDC</span>
+          <span class="project-tag">Hazelcast caching</span>
+          <span class="project-tag">GCP · OpenShift · K8s</span>
+          <span class="project-tag">JVM performance tuning</span>
+          <span class="project-tag">API abstraction design</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">SPADU – Employee Management System</div>
+          <span class="project-badge badge-live">Live</span>
+        </div>
+        <p class="project-desc">Full-stack SaaS application built from scratch on GCP — Spring Boot 4.1, Java 21, Angular/TypeScript, Spring Security with JWT, Stripe billing, Cloud SQL, and GCP App Engine deployment. Demonstrates end-to-end ownership from architecture through production operations.</p>
+        <div class="project-tags">
+          <span class="project-tag">Java 21 · Spring Boot 4.1</span>
+          <span class="project-tag">GCP App Engine</span>
+          <span class="project-tag">Cloud SQL · Pub/Sub</span>
+          <span class="project-tag">Angular / TypeScript</span>
+          <span class="project-tag">Stripe</span>
+        </div>
+        <a href="https://ems-lu-agile.appspot.com/" class="project-link" target="_blank" rel="noopener">View live ↗</a>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">Privacy4Cars – GCP-Native Multi-Tenant Platform</div>
+          <span class="project-badge badge-prod">Production · Lead</span>
+        </div>
+        <p class="project-desc">Designed the entire GCP cloud architecture from scratch — selecting Cloud SQL for transactional data, Datastore for entity storage, and BigQuery for analytics based on access patterns and consistency requirements. Built Pub/Sub ingestion pipelines with dead-letter handling, lightweight backend services, and led a Java 8→17 migration with zero service disruption across a 7-person team.</p>
+        <div class="project-tags">
+          <span class="project-tag">Java 17 · Spring Boot</span>
+          <span class="project-tag">GCP Cloud SQL · Datastore · BigQuery</span>
+          <span class="project-tag">Pub/Sub · Cloud Functions</span>
+          <span class="project-tag">Cloud Armor · Load Balancer</span>
+          <span class="project-tag">End-to-end systems design</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-header">
+          <div class="project-title">Astral Synthetics – Dataset Generation MVP</div>
+          <span class="project-badge badge-mvp">Startup MVP</span>
+        </div>
+        <p class="project-desc">Built a lightweight GCP-based platform for large file ingestion and synthetic data generation. Implemented GCP Cloud Functions for serverless backend jobs, Spring Batch with multithreading for parallel file processing, and efficient parsing abstractions for high-volume dataset handling.</p>
+        <div class="project-tags">
+          <span class="project-tag">GCP Cloud Functions</span>
+          <span class="project-tag">Spring Batch · Multithreading</span>
+          <span class="project-tag">Java · Spring Boot</span>
+          <span class="project-tag">Efficient parsing abstractions</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Cover Letter</p>
+    <h2>Why Speechify</h2>
+    <div class="letter-body">
+      <p style="font-weight:600;color:var(--navy);margin-bottom:18px;">To the Speechify Engineering Team,</p>
+      <p>I want to be upfront about one thing: my primary language is Java, not Kotlin. The JVM foundation is the same and the syntax gap is smaller than it looks — I've been deliberately ramping on Kotlin as the clear direction for modern JVM development. I'd rather say that clearly than pretend otherwise.</p>
+      <p>What I bring fully is the systems thinking and GCP depth this role needs. At Synechron embedded at Citi, I design and own backend services processing 400–600K trade transactions daily — architecting API abstractions for cross-team consumption, tuning JVM performance under strict SLA constraints, and applying end-to-end thinking to eliminate bottlenecks. I've built Kafka pipelines with exactly-once-safe guarantees, multi-threaded request handlers with pod resource isolation, and Hazelcast in-memory caching layers — all on GCP in production.</p>
+      <p>GCP specifically is deep for me. App Engine, Pub/Sub, Cloud Functions, Cloud SQL, BigQuery, Cloud Storage, Cloud Armor — I've built production systems on all of them. At Privacy4Cars I made the cloud architecture choices from scratch, selecting data stores based on access patterns, building event-driven ingestion pipelines with Pub/Sub dead-letter handling, and designing lightweight backend services that stayed simple as the platform scaled to 300+ customers.</p>
+      <p>The Core Experiences mandate — foundational services and SDKs that every product team depends on — is exactly the kind of high-leverage systems work I find most interesting. You can't optimize locally; you have to think end-to-end about contracts, reliability, and how your decisions ripple across the platform. That's how I naturally approach engineering.</p>
+      <p>On the startup pace — I've done seed-stage engineering twice. I know how to move fast, make pragmatic calls about what ships now versus what needs more time, and stay heads-down without needing structure around me. What Speechify is doing for audio information access is something I'd actually use every day — and that matters to me.</p>
+      <p style="margin-top:24px;font-weight:600;color:var(--navy);">Arko Ghosh<br>
+        <span style="font-weight:400;color:var(--muted);font-size:0.9rem;">aghosh7@lakeheadu.ca · Mississauga, ON ·
+          <a href="https://www.linkedin.com/in/arko-ghosh-558520121/" style="color:var(--accent-dim);">LinkedIn</a> ·
+          <a href="https://github.com/bloomrono11" style="color:var(--accent-dim);">GitHub</a>
+        </span>
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <p class="section-label">Education</p>
+    <h2>Academic background</h2>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div style="font-weight:600;color:var(--navy);margin-bottom:4px;">MSc Engineering</div>
+        <div class="stat-label">Lakehead University, ON · 2024–2025<br>Large-Scale Data Analytics · Computer Networks · Mobile Programming</div>
+      </div>
+      <div class="stat-card">
+        <div style="font-weight:600;color:var(--navy);margin-bottom:4px;">BSc Computer Science</div>
+        <div class="stat-label">NDSU, Fargo ND · 2007–2011<br>Algorithms · Data Structures · OS Design · Data Mining</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-links">
+    <a href="https://github.com/bloomrono11" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://www.linkedin.com/in/arko-ghosh-558520121/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://ems-lu-agile.appspot.com/" target="_blank" rel="noopener">Live Project</a>
+    <a href="mailto:aghosh7@lakeheadu.ca">aghosh7@lakeheadu.ca</a>
+  </div>
+  <div>Arko Ghosh · Mississauga, ON · Systems thinker. GCP practitioner. JVM at heart.</div>
+</footer>
+
+<script>
+  const lines = [
+    '$ design --api reliable --abstraction clean --system end-to-end',
+    '$ gcloud functions deploy parser --runtime java21 --trigger-http',
+    '$ java -Xmx4g -XX:+UseG1GC -jar trade-processor.jar',
+    '$ git commit -m "simplify: reduce abstraction surface, ship faster"',
+    '$ kotlin --jvm-target 21 --coroutines enabled --ramping true',
+  ];
+  let idx = 0;
+  const el = document.getElementById('ticker');
+  setInterval(() => {
+    el.style.opacity = 0;
+    setTimeout(() => {
+      idx = (idx + 1) % lines.length;
+      el.textContent = lines[idx];
+      el.style.opacity = 1;
+    }, 400);
+  }, 3200);
+</script>
+
+</body>
+</html>
